@@ -28,7 +28,17 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
-
+@app.route('/drinks', methods=['GET'])
+def get_drinks():
+    drinks_query = Drink.query.all()
+    drinks = []
+    for drink in drinks_query:
+        drinks.append(drink.short())
+    
+    return jsonify({
+        'success': True,
+        'drinks': drinks
+    }, 200)
 
 '''
 @TODO implement endpoint
@@ -38,7 +48,17 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
-
+@app.route('/drinks-detail', methods=['GET'])
+def get_drinks():
+    drinks_query = Drink.query.all()
+    drinks = []
+    for drink in drinks_query:
+        drinks.append(drink.long())
+    
+    return jsonify({
+        'success': True,
+        'drinks': drinks
+    }, 200)
 
 '''
 @TODO implement endpoint
