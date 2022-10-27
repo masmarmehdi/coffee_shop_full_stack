@@ -3,11 +3,8 @@ from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+from src.settings import AUTH0_DOMAIN, API_AUDIENCE, ALGORITHMS
 
-
-AUTH0_DOMAIN = 'mm14.eu.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'localhost'
 
 ## AuthError Exception
 '''
@@ -121,7 +118,7 @@ def verify_decode_jwt(token):
                 token,
                 rsa_key,
                 algorithms=ALGORITHMS,
-                audience='coffe',
+                audience= API_AUDIENCE,
                 issuer='https://' + AUTH0_DOMAIN + '/'
             )
 
